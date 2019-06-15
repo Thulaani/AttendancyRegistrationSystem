@@ -1,0 +1,184 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Oct 02, 2017 at 03:24 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.6.23
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `attendance`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance`
+--
+
+CREATE TABLE `attendance` (
+  `AttID` int(20) NOT NULL,
+  `EmpID` int(10) NOT NULL,
+  `Prensent` int(1) NOT NULL,
+  `AttDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`AttID`, `EmpID`, `Prensent`, `AttDate`) VALUES
+(1607, 32, 1, '2017-08-31'),
+(1610, 35, 1, '2017-10-02'),
+(1611, 32, 1, '2017-10-02'),
+(1616, 35, 1, '2017-10-04'),
+(1617, 32, 1, '2017-10-04'),
+(1619, 35, 1, '2017-10-05'),
+(1620, 32, 1, '2017-10-05'),
+(1621, 35, 1, '2017-10-03'),
+(1622, 32, 1, '2017-10-03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee_detail`
+--
+
+CREATE TABLE `employee_detail` (
+  `EmpID` int(10) NOT NULL,
+  `EmpName` varchar(255) NOT NULL,
+  `EmpAddress` text NOT NULL,
+  `EmpMobile` varchar(15) NOT NULL,
+  `EmpEmail` varchar(50) NOT NULL,
+  `EmpBirthdate` date NOT NULL,
+  `EmpGroup` varchar(5) NOT NULL,
+  `EmpTechnology` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee_detail`
+--
+
+INSERT INTO `employee_detail` (`EmpID`, `EmpName`, `EmpAddress`, `EmpMobile`, `EmpEmail`, `EmpBirthdate`, `EmpGroup`, `EmpTechnology`) VALUES
+(32, 'maupa', 'Truderinger', '877564532', 'eu@gamil.com', '2017-04-04', '1', 'PhP'),
+(35, 'Petty', 'truderinger', '55464623', 'dr@yahoo.com', '0000-00-00', '2', 'WebDevelopment');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `UserID` int(10) NOT NULL,
+  `UserName` varchar(50) NOT NULL,
+  `Password` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`UserID`, `UserName`, `Password`) VALUES
+(2, 'admin', 'admin123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `trn_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `trn_date`) VALUES
+(4, 'admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', '2017-09-21 09:36:04'),
+(8, 'maupalee', 'lm@yahoo.com', '1425bdb7a2fed0b3742a4e1a20905c84', '2017-09-22 10:18:54'),
+(9, 'nyasha', 'nyasha@yahoo.com', '6dbdf76ae2a607ca6791041a6131ae39', '2017-09-28 11:20:03');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`AttID`),
+  ADD KEY `EmpID` (`EmpID`);
+
+--
+-- Indexes for table `employee_detail`
+--
+ALTER TABLE `employee_detail`
+  ADD PRIMARY KEY (`EmpID`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`UserID`),
+  ADD KEY `UserID` (`UserID`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `attendance`
+--
+ALTER TABLE `attendance`
+  MODIFY `AttID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1623;
+--
+-- AUTO_INCREMENT for table `employee_detail`
+--
+ALTER TABLE `employee_detail`
+  MODIFY `EmpID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `UserID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`EmpID`) REFERENCES `employee_detail` (`EmpID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
